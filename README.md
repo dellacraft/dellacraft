@@ -38,6 +38,6 @@ Here are some ideas to get you started:
 [![Twitter](https://img.shields.io/twitter/follow/dellacraft65266?style=social)](https://twitter.com/dellacraft65266)
 [![YouTube](https://img.shields.io/youtube/channel/subscribers/UCgquMk7qjQdoe_krQYgmIjg?style=social)](https://youtube.com/channel/UCgquMk7qjQdoe_krQYgmIjg)
 [![Note](https://img.shields.io/badge/Note-記事はこちら-41C9B4?logo=bookstack&logoColor=white)](https://note.com/dellacraft)
-https://m.youtube.com/watch?v=JGbZsorbVF8
+
 ---
 
