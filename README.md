@@ -36,7 +36,7 @@ Here are some ideas to get you started:
 
 ## 🌐 Links
 [![Twitter](https://img.shields.io/twitter/follow/dellacraft65266?style=social)](https://twitter.com/dellacraft65266)
-[![YouTube](https://img.shields.io/youtube/channel/subscribers/dellacraft-c5p?style=social)](https://youtube.com/channel/dellacraft-c5p)
+[![YouTube](https://img.shields.io/youtube/channel/subscribers/@dellacraft-c5p?style=social)](https://youtube.com/channel/@dellacraft-c5p)
 [![Note](https://img.shields.io/badge/Note-記事はこちら-41C9B4?logo=bookstack&logoColor=white)](https://note.com/dellacraft)
 
 ---
