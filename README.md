@@ -1,4 +1,4 @@
-## Hi there 👋
+## Hi there 👋 I'm dellacraft
 
 <!--
 **dellacraft/dellacraft** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
@@ -14,3 +14,32 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+---
+
+## 🚀 Tech Stack
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
+![Flutter](https://img.shields.io/badge/Flutter-02569B?logo=flutter&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-232F3E?logo=amazon-aws&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+![Blender](https://img.shields.io/badge/Blender-F5792A?logo=blender&logoColor=white)
+
+---
+
+## 📊 GitHub Stats
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=dellacraft&show_icons=true&theme=radical)
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=dellacraft&layout=compact&theme=radical)
+![Streak Stats](https://github-readme-streak-stats.herokuapp.com/?user=dellacraft&theme=radical)
+
+---
+
+## 🌐 Links
+[![Twitter](https://img.shields.io/twitter/follow/dellacraft?style=social)](https://twitter.com/yourname)
+[![YouTube](https://img.shields.io/youtube/channel/subscribers/CHANNEL_ID?style=social)](https://youtube.com/channel/CHANNEL_ID)
+[![Note](https://img.shields.io/badge/Note-記事はこちら-41C9B4?logo=bookstack&logoColor=white)](https://note.com/yourname)
+[![Blog](https://img.shields.io/badge/Blog-dellacraft.dev-0A0A0A?logo=githubpages&logoColor=white)](https://dellacraft.dev)
+
+---
+
+⭐️ ピン留めリポジトリもぜひチェックしてください！
