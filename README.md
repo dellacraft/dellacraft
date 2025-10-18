@@ -41,3 +41,11 @@ Here are some ideas to get you started:
 
 ---
 
+## 🧠 Notes & Tips
+
+I sometimes jot down **technical or creative notes** that I tend to forget —  
+like small setup tips, shell commands, or workflow tweaks.
+
+📁 [View my personal notes →](./docs/README.md)
+
+They’re open so that others might find something useful, too.
