@@ -30,3 +30,8 @@ Host github-work
   HostName github.com
   User git
   IdentityFile ~/.ssh/id_rsa_work
+
+💡 Tips
+Host can be any name — it’s like a nickname for that connection.
+You can have multiple entries, one per identity.
+File permissions matter:
