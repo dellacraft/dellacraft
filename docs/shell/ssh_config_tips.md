@@ -17,6 +17,7 @@ This prevents "Permission denied" or "wrong account" errors when pushing or pull
 ## ⚙️ Example Configuration
 
 ```sshconfig
+
 # ~/.ssh/config
 
 # Default GitHub (personal)
@@ -30,6 +31,7 @@ Host github-work
   HostName github.com
   User git
   IdentityFile ~/.ssh/id_rsa_work
+
 ```　　
 
 💡 Tips
