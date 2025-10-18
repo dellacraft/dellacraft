@@ -31,7 +31,7 @@ Host github-work
   User git
   IdentityFile ~/.ssh/id_rsa_work
 
----
+```
 
 💡 Tips
 Host can be any name — it’s like a nickname for that connection.
