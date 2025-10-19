@@ -17,7 +17,6 @@ This prevents "Permission denied" or "wrong account" errors when pushing or pull
 ## ⚙️ Example Configuration
 
 ```sshconfig
-
 # ~/.ssh/config
 
 # Default GitHub (personal)
@@ -31,7 +30,6 @@ Host github-work
   HostName github.com
   User git
   IdentityFile ~/.ssh/id_rsa_work
-
 ```
 
 ### 💡 Tips  
@@ -40,10 +38,8 @@ Host github-work
 - File permissions matter:
 
 ```bash
-
 chmod 600 ~/.ssh/id_rsa_*
 chmod 644 ~/.ssh/*.pub
-
 ```
 
 ---
@@ -54,9 +50,7 @@ After adding the custom host (github-work),
 update your repository’s remote URL:
 
 ```bash
-
 git remote set-url origin git@github-work:yourname/repo.git
-
 ```
 
 Then test it:
@@ -70,9 +64,7 @@ ssh -T git@github-work
 Expected output:
 
 ```bash
-
 Hi yourname! You've successfully authenticated, but GitHub does not provide shell access.
-
 ```
 
 ---
