@@ -31,8 +31,39 @@ main "$@"
 ```
 
 ### 💡 Tips
+
 - The #!/usr/bin/env bash line ensures your script runs with Bash even if it’s not in /bin/.
 - set -euo pipefail makes your script safer (exit on error, undefined vars, and broken pipes).
 - $@ passes any command-line arguments to the main function.
 - local limits variables to the function’s scope.
+
+---
+
+## 🚀 How to Run
+
+1. Create the file
+
+```bash
+touch hello.sh
+```
+
+2. Open in VS Code
+
+```bash
+code hello.sh
+```
+
+3. Paste the script above
+4. Make it executable
+
+```bash
+chmod +x hello.sh
+```
+
+5. Run it
+
+```bash
+./hello.sh
+./hello.sh dellacraft
+```
 
