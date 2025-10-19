@@ -46,4 +46,4 @@ chmod 644 ~/.ssh/*.pub
 
 ```
 
-🧩 How to Use a Custom Host in Git
+## 🧩 How to Use a Custom Host in Git
