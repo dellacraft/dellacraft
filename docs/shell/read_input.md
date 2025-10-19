@@ -101,3 +101,22 @@ Hello, dellacraft!
 ```
 
 ---
+
+## 🪄 Troubleshooting
+
+| Issue                    | Cause / Fix                                                  |
+| ------------------------ | ------------------------------------------------------------ |
+| Script exits immediately | Make sure you didn’t redirect input (e.g. `./script < file`) |
+| Prompt doesn’t appear    | Add `-p` to show message before input                        |
+| Input not visible        | You’re using `-s`, that’s normal (silent mode)               |
+
+---
+
+## ✅ Quick Recap
+
+- Use read -p for prompts
+- Use read -sp for hidden input (passwords)
+- Use read -a for arrays
+- Always quote your variables: "${var}"
+
+> 💬 A small command that turns your Bash scripts into interactive tools.
