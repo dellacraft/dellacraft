@@ -30,3 +30,9 @@ main() {
 main "$@"
 ```
 
+### 💡 Tips
+- The #!/usr/bin/env bash line ensures your script runs with Bash even if it’s not in /bin/.
+- set -euo pipefail makes your script safer (exit on error, undefined vars, and broken pipes).
+- $@ passes any command-line arguments to the main function.
+- local limits variables to the function’s scope.
+
