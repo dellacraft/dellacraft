@@ -45,3 +45,5 @@ chmod 600 ~/.ssh/id_rsa_*
 chmod 644 ~/.ssh/*.pub
 
 ```
+
+🧩 How to Use a Custom Host in Git
