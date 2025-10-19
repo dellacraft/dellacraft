@@ -85,3 +85,27 @@ Hi yourname! You've successfully authenticated, but GitHub does not provide shel
 | List active identities | `ssh-add -l`                 | Shows keys loaded into the SSH agent     |
 | Add a key to agent     | `ssh-add ~/.ssh/id_rsa_work` | Temporary for this session               |
 | Remove all keys        | `ssh-add -D`                 | Clears agent cache                       |
+
+---
+
+## 🪄 Troubleshooting
+
+| Symptom                              | Possible Fix                                                            |
+| ------------------------------------ | ----------------------------------------------------------------------- |
+| `Permission denied (publickey)`      | Check file permissions (`chmod 600`), or ensure the right key is in use |
+| GitHub connects to the wrong account | Verify `Host` name and remote URL (`git remote -v`)                     |
+| SSH config ignored                   | Ensure file is named exactly `config` (no extension)                    |
+| `ssh -T git@github-work` fails       | Try `ssh -vT git@github-work` for verbose output                        |
+
+---
+
+## ✅ Quick Recap
+
+- Define multiple keys in ~/.ssh/config
+- Use a custom Host alias (like github-work)
+- Point your repo’s remote to git@<alias>:user/repo.git
+- Test with ssh -T
+
+> 💬 This note is meant for quick recall —  
+> no overthinking, just enough to fix the “Wait, how did I do that again?” moments.
+
