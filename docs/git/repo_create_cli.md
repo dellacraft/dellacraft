@@ -21,3 +21,15 @@ GitHub provides an official command-line tool called **`gh`**.
 ```bash
 brew install gh
 ```
+
+### 🔑 Log in to GitHub
+
+```bash
+gh auth login
+```
+
+> Follow the prompts:
+> Choose GitHub.com
+> Choose HTTPS or SSH
+> Authenticate via browser or token
+
