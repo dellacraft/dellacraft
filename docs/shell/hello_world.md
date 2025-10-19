@@ -76,3 +76,35 @@ Hello, World!
 Hello, dellacraft!
 ```
 
+---
+
+## 🧠 Notes
+
+| Command             | Description                           |
+| ------------------- | ------------------------------------- |
+| `chmod +x hello.sh` | Give the file execute permission      |
+| `./hello.sh`        | Run the script in the current folder  |
+| `bash hello.sh`     | Run without execute permission        |
+| `"$@"`              | Forward all arguments to the function |
+
+---
+
+## 🪄 Troubleshooting
+
+| Problem                       | Solution                                           |
+| ----------------------------- | -------------------------------------------------- |
+| `Permission denied`           | Run `chmod +x hello.sh` first                      |
+| `command not found`           | Make sure you’re using `./hello.sh` (include `./`) |
+| `zsh: bad interpreter`        | Try changing the shebang to `#!/usr/bin/env bash`  |
+| VS Code doesn’t find the file | Check that you’re in the same directory            |
+
+---
+
+## ✅ Quick Recap
+
+- Create a .sh file with a proper shebang
+- Add set -euo pipefail for safety
+- Make it executable with chmod +x
+- Run it via ./script.sh
+
+> 💬 The smallest script you’ll ever write — but the first step to automation.
