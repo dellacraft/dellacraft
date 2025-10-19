@@ -61,8 +61,8 @@ read -p "Enter first and last name: " first last
 echo "Welcome, ${first} ${last}!"
 ```
 
-If the user types John Doe,  
-→ $first="John" and $last="Doe".
+> If the user types John Doe,  
+> → $first="John" and $last="Doe".
 
 ---
 
