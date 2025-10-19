@@ -1,10 +1,16 @@
 # 🧰 Git Notes
 
-A place to jot down quick notes and command snippets that I often use but tend to forget.
+Quick reminders for Git commands I often use but tend to forget.  
+Focused on real-world fixes and common workflows.
 
-## index
-- [hello_world.md](./hello_world.md) — Hello World (with VS Code)
-- [check_current_shell.md](./check_current_shell.md) — shell check
-- [read_input.md](./read_input.md) — command（`read`）
-- [shebang_guide.md](./shebang_guide.md) — shebang（bash/zsh/posix）
-- [ssh_config_tips.md](./ssh_config_tips.md) — ssh key（`~/.ssh/config`）
+---
+
+## 📂 Index
+
+- [repo_create_cli.md](./repo_create_cli.md) — Create a GitHub repo from CLI  
+- [auth_check.md](./auth_check.md) — Check which account is authenticated  
+- [branch_basics.md](./branch_basics.md) — Create / switch / delete branches  
+- [undo_and_amend.md](./undo_and_amend.md) — Fix last commit  
+- [reset_revert.md](./reset_revert.md) — Undo changes safely  
+- [stash_tips.md](./stash_tips.md) — Temporarily save work in progress  
+- [merge_rebase.md](./merge_rebase.md) — Merge vs Rebase basics
