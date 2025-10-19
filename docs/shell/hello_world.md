@@ -64,6 +64,15 @@ chmod +x hello.sh
 
 ```bash
 ./hello.sh
+
 ./hello.sh dellacraft
+```
+
+### 🧾 Output:
+
+```bash
+Hello, World!
+
+Hello, dellacraft!
 ```
 
