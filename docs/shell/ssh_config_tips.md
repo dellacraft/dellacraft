@@ -1,16 +1,16 @@
-# 🔐 SSH Config Tips
+# 🔐 SSH Config Tips for macOS
 
-A lightweight place to keep quick notes and tips I often forget.  
-This one’s about managing multiple SSH keys and GitHub accounts efficiently.
+A lightweight place to keep quick notes and tips I often forget.
+This one’s about managing multiple SSH keys and GitHub accounts efficiently on macOS using the system Keychain.
 
 ---
 
 ## 🧭 Overview
 
-When you have more than one GitHub account or deploy key,  
-you can tell SSH which key to use for each host by editing `~/.ssh/config`.
-
-This prevents "Permission denied" or "wrong account" errors when pushing or pulling.
+When you have multiple GitHub accounts or SSH keys,
+you can tell SSH which key to use for each host by editing ~/.ssh/config.
+macOS automatically manages your SSH keys through Keychain,
+so you don’t have to re-enter your passphrase after every reboot.
 
 ---
 
@@ -18,6 +18,12 @@ This prevents "Permission denied" or "wrong account" errors when pushing or pull
 
 ```sshconfig
 # ~/.ssh/config
+
+# Use the macOS keychain
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
 
 # Default GitHub (personal)
 Host github.com
@@ -33,8 +39,8 @@ Host github-work
 ```
 
 ### 💡 Tips  
-- Host can be any name — it’s like a nickname for that connection.
-- You can have multiple entries, one per identity.
+- Host * applies to all SSH connections. AddKeysToAgent yes and UseKeychain yes are essential for macOS Keychain integration.
+- Host is just a nickname — you can name it anything like github-work or github-personal.
 - File permissions matter:
 
 ```bash
@@ -44,16 +50,36 @@ chmod 644 ~/.ssh/*.pub
 
 ---
 
+## 🍎 Add Keys to macOS Keychain
+
+Run the following once to permanently store your passphrase in the Keychain:
+
+```bash
+ssh-add --apple-use-keychain ~/.ssh/id_rsa_personal
+ssh-add --apple-use-keychain ~/.ssh/id_rsa_work
+```
+
+> 💬 On macOS Ventura and later, -K is deprecated.
+> Use --apple-use-keychain instead.
+
+Check which keys are currently loaded:
+
+```bash
+ssh-add -l
+```
+
+---
+
 ## 🧩 How to Use a Custom Host in Git
 
-After adding the custom host (github-work),
+After adding the custom host (e.g., github-work),
 update your repository’s remote URL:
 
 ```bash
 git remote set-url origin git@github-work:yourname/repo.git
 ```
 
-Then test it:
+Then test your connection:
 
 ```bash
 
@@ -87,6 +113,7 @@ Hi yourname! You've successfully authenticated, but GitHub does not provide shel
 | `Permission denied (publickey)`      | Check file permissions (`chmod 600`), or ensure the right key is in use |
 | GitHub connects to the wrong account | Verify `Host` name and remote URL (`git remote -v`)                     |
 | SSH config ignored                   | Ensure file is named exactly `config` (no extension)                    |
+| Keychain not used                    | Add UseKeychain yes under Host * section                                |
 | `ssh -T git@github-work` fails       | Try `ssh -vT git@github-work` for verbose output                        |
 
 ---
@@ -94,9 +121,9 @@ Hi yourname! You've successfully authenticated, but GitHub does not provide shel
 ## ✅ Quick Recap
 
 - Define multiple keys in ~/.ssh/config
-- Use a custom Host alias (like github-work)
-- Point your repo’s remote to git@<alias>:user/repo.git
-- Test with ssh -T
+- Enable macOS Keychain support (UseKeychain yes)
+- Add keys with ssh-add --apple-use-keychain
+- Use custom Host aliases per GitHub account
 
 > 💬 This note is meant for quick recall —  
 > no overthinking, just enough to fix the “Wait, how did I do that again?” moments.
