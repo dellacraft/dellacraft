@@ -1,4 +1,3 @@
-
 # 📦 pnpm Setup
 
 pnpm is a **fast, disk-efficient alternative to npm** for managing JavaScript and TypeScript project dependencies. Combined with Corepack, it ensures reproducible builds and consistent dependency versions across machines.
@@ -20,7 +19,7 @@ Enable Corepack (bundled with Node.js ≥16.10):
 
 ```bash
 corepack enable
-corepack use pnpm@v10.20.0
+corepack use pnpm@9.12.0
 ```
 
 This will pin the pnpm version in your project’s `packageManager` field automatically.
@@ -122,6 +121,67 @@ Commit this field to version control so all collaborators use the same pnpm rele
 | Reproducibility     | Moderate              | Excellent (strict lockfile) |
 | Monorepo support    | Limited               | Built-in, first-class       |
 | Installation method | Nested `node_modules` | Symlinked, flat layout      |
+
+---
+
+## 🧰 Troubleshooting: `pnpm not found`
+
+If you see `zsh: command not found: pnpm`, it usually means pnpm is not linked to your PATH yet. Try these steps in order:
+
+1️⃣ **Make sure Node.js is active (via asdf)**
+
+```bash
+node -v
+```
+
+If this fails, install and activate Node:
+
+```bash
+asdf install nodejs 22.8.0
+asdf local nodejs 22.8.0
+```
+
+2️⃣ **Enable Corepack**
+
+```bash
+corepack enable
+corepack prepare pnpm@9.12.0 --activate
+```
+
+3️⃣ **Regenerate asdf shims**
+
+```bash
+asdf reshim nodejs
+```
+
+4️⃣ **Reload your shell**
+
+```bash
+exec $SHELL -l
+```
+
+5️⃣ **Check PATH**
+
+```bash
+echo $PATH | tr ':' '\n' | grep asdf/shims
+```
+
+If missing, add this to your `~/.zshrc`:
+
+```bash
+. "$(brew --prefix asdf)/libexec/asdf.sh"
+```
+
+6️⃣ **Verify installation**
+
+```bash
+which pnpm
+pnpm -v
+```
+
+It should now point to `~/.asdf/shims/pnpm`.
+
+> 💡 Run `asdf reshim nodejs` anytime you enable Corepack or install new global tools to update shims.
 
 ---
 
