@@ -20,7 +20,7 @@ Enable Corepack (bundled with Node.js ≥16.10):
 
 ```bash
 corepack enable
-corepack use pnpm@9.12.0
+corepack use pnpm@v10.20.0
 ```
 
 This will pin the pnpm version in your project’s `packageManager` field automatically.
