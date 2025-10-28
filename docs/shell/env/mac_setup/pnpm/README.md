@@ -185,6 +185,63 @@ It should now point to `~/.asdf/shims/pnpm`.
 
 ---
 
+## 🔁 Migrating from npm
+
+If your project previously used **npm**, here’s how things map when switching to **pnpm**:
+
+### 1) Local project dependencies
+
+* Remove npm artifacts and reinstall with pnpm:
+
+  ```bash
+  rm -rf node_modules package-lock.json
+  pnpm install
+  ```
+* pnpm creates a **symlinked `node_modules`** and uses a shared content-addressable store for faster, leaner installs.
+* A `pnpm-lock.yaml` will be generated (commit this instead of `package-lock.json`).
+
+### 2) Global packages
+
+* npm’s global packages are **not reused** by pnpm (they live in different locations).
+* Reinstall only what you need:
+
+  ```bash
+  pnpm add -g typescript eslint aws-cdk
+  ```
+* Check global lists:
+
+  * npm: `npm list -g --depth 0`
+  * pnpm: `pnpm list -g --depth 0`
+
+### 3) Corepack integration
+
+Enable Corepack to standardize the pnpm version across machines:
+
+```bash
+corepack enable
+corepack use pnpm@9.12.0
+```
+
+This pins pnpm via the `packageManager` field in `package.json` and avoids accidental npm usage.
+
+### 4) Team-safe migration checklist
+
+1. Verify `pnpm install` works locally
+2. Remove `package-lock.json`
+3. Commit `pnpm-lock.yaml` and `"packageManager"` field
+4. Document pnpm usage in your README
+
+### Quick reference
+
+| Topic         | npm                     | pnpm                     |
+| ------------- | ----------------------- | ------------------------ |
+| Lockfile      | `package-lock.json`     | `pnpm-lock.yaml`         |
+| Local install | `npm install`           | `pnpm install`           |
+| Global list   | `npm list -g --depth 0` | `pnpm list -g --depth 0` |
+| Store         | `~/.npm`                | `~/.pnpm-store`          |
+
+---
+
 ## 🧰 Tips
 
 * Use `pnpm store prune` to clean up unused packages.
