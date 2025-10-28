@@ -140,6 +140,46 @@ ls ~/.asdf/installs/nodejs/
 
 ---
 
+## 🪞 How Shims Work
+
+asdf manages commands via **shims** — lightweight wrapper scripts that sit between your terminal and the actual binary.
+
+```
+~/.asdf/
+├── installs/
+│   └── nodejs/22.8.0/bin/pnpm   # actual binary
+└── shims/
+    ├── node
+    ├── npm
+    ├── pnpm                     # shim script
+```
+
+When you run `pnpm`, the shim does the following:
+
+1. Detects which version of Node.js should be active (by reading `.tool-versions`).
+2. Activates that environment.
+3. Executes the corresponding binary from `~/.asdf/installs/...`.
+
+### 🧰 Useful Commands
+
+| Command              | Purpose                                                 |                                            |
+| -------------------- | ------------------------------------------------------- | ------------------------------------------ |
+| `asdf reshim nodejs` | Regenerates shims after installing new tools or plugins |                                            |
+| `echo $PATH          | grep asdf`                                              | Check that `~/.asdf/shims` is in your PATH |
+| `which pnpm`         | Should point to `~/.asdf/shims/pnpm`                    |                                            |
+
+### ⚠️ Common Pitfalls
+
+* If `pnpm` or `node` show “command not found”, PATH to `asdf/shims` may be missing.
+* Make sure your shell loads asdf at startup:
+
+  ```bash
+  . "$(brew --prefix asdf)/libexec/asdf.sh"
+  ```
+* Run `asdf reshim nodejs` after enabling Corepack or installing new global tools.
+
+---
+
 ## 🧩 Best Practices
 
 * Always include `.tool-versions` in your repo.
