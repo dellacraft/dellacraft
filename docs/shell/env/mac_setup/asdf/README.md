@@ -1,4 +1,3 @@
-
 # ⚙️ asdf Setup
 
 asdf is a **version manager** for multiple runtime environments such as Node.js, Python, Go, and more. It ensures consistent development environments across machines and projects.
@@ -62,6 +61,82 @@ direnv allow
 ```
 
 Now `asdf` automatically activates the correct Node version when you `cd` into the directory.
+
+---
+
+## 🧩 How Installation Works
+
+* `.tool-versions` declares which versions should be used.
+* `asdf install` reads `.tool-versions` and installs missing runtimes.
+* Once installed, `asdf` automatically switches to the correct version whenever you run commands.
+
+### Typical Flow
+
+```bash
+# 1. Clone the repo
+cd my-project
+
+# 2. Install required versions from .tool-versions
+asdf install
+
+# 3. Use the specified version automatically
+node -v   # v22.8.0
+```
+
+> You only need to install each version once. After that, it is reused across projects.
+
+---
+
+## 🧱 Version Management
+
+### 🔍 Check Installed Versions
+
+```bash
+asdf list nodejs
+```
+
+Example output:
+
+```
+  20.12.2
+* 22.8.0
+```
+
+* `*` marks the currently active version.
+
+### 📦 Check Currently Active Versions for All Tools
+
+```bash
+asdf current
+```
+
+Example:
+
+```
+nodejs   22.8.0   (set by /Users/you/projects/my-app/.tool-versions)
+python   3.12.1   (set by /Users/you/.tool-versions)
+```
+
+### 🧰 Show All Installed Versions
+
+```bash
+asdf list
+```
+
+### 📁 Check Where Versions Are Installed
+
+```bash
+ls ~/.asdf/installs/nodejs/
+# => 20.12.2  22.8.0
+```
+
+| Command                      | Purpose                                      |
+| ---------------------------- | -------------------------------------------- |
+| `asdf list <lang>`           | Show installed versions                      |
+| `asdf current`               | Show active versions and source files        |
+| `asdf list`                  | List all installed tools and versions        |
+| `asdf list all <lang>`       | Show all available versions for installation |
+| `ls ~/.asdf/installs/<lang>` | Check actual installation directories        |
 
 ---
 
