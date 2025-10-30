@@ -1,191 +1,164 @@
-# ⚙️ asdf Setup
+# ⚙️ asdf Setup (v0.18+)
 
-asdf is a **version manager** for multiple runtime environments such as Node.js, Python, Go, and more. It ensures consistent development environments across machines and projects.
+asdf is a **version manager** for multiple runtime environments such as Node.js, Python, Go, AWS CLI, and more.  
+It ensures consistent development environments across machines and projects.
 
 ---
 
 ## 🧭 Overview
 
-* Manages runtime versions per project (Node.js, Python, etc.).
+* Manages runtime versions per **user** (`~/.tool-versions`) or **project** (`.tool-versions`).
 * Prevents version drift between developers or CI environments.
-* Integrates easily with tools like direnv for auto-switching.
+* Integrates easily with tools like **direnv** for auto-switching.
 
 ---
 
-## 🚀 Installation & Usage
+## 🚀 Installation & Basic Usage
 
 ```bash
 # Install asdf via Homebrew
 brew install asdf
 
-# Add Node.js plugin (first time only)
+# Load asdf in your shell (~/.zshrc)
+. "$(brew --prefix asdf)/libexec/asdf.sh"
+
+# Add plugins (first time only)
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf plugin add python https://github.com/danhper/asdf-python.git
+asdf plugin add awscli https://github.com/MetricMike/asdf-awscli.git
+```
+---
 
-# List available Node versions
-asdf list all nodejs | grep '^22\.'
+## 🐍 Python / 🪣 AWS CLI / 🟢 Node.js Setup
 
-# Install and set Node 22.x
+```bash
+# Check available versions
+asdf list all python | tail -5
+asdf list all nodejs | tail -5
+asdf list all awscli | tail -5
+
+# Install desired versions
+asdf install python 3.13.0
 asdf install nodejs 22.8.0
-asdf local nodejs 22.8.0     # Lock Node version for this project
+asdf install awscli 2.17.34
+
+# Set global (user-wide) defaults
+asdf set -u python 3.13.0
+asdf set -u nodejs 22.8.0
+asdf set -u awscli 2.17.34
+
+# Or, for a specific project
+asdf set python 3.13.0
+asdf set nodejs 22.8.0
+asdf set awscli 2.17.34
 ```
+
+✅ -u = user (global) ／ without -u = local (project)
 
 ---
 
-## 📄 Example `.tool-versions`
+## 📄 Example .tool-versions
 
-This file defines the runtime versions used in your project and should be committed to version control.
-
+```text
+python  3.13.0
+nodejs  22.8.0
+awscli  2.17.34
 ```
-nodejs 22.8.0
-```
 
-> You can add other runtimes like `python`, `golang`, or `java` to the same file.
+> Commit this file to version control to guarantee reproducible environments.
 
 ---
 
-## ⚙️ direnv Integration (Optional)
-
-To automatically switch versions when entering a directory:
+## ⚙️ direnv Integration (optional)
 
 ```bash
 brew install direnv
-# In your shell config (.zshrc or .bashrc):
+# In your shell config
 eval "$(direnv hook zsh)"
 ```
 
-Then, in your project:
+Then in your project:
 
 ```bash
 echo 'use asdf' > .envrc
 direnv allow
 ```
 
-Now `asdf` automatically activates the correct Node version when you `cd` into the directory.
+Now asdf automatically activates the correct versions when entering the directory.
 
 ---
 
-## 🧩 How Installation Works
-
-* `.tool-versions` declares which versions should be used.
-* `asdf install` reads `.tool-versions` and installs missing runtimes.
-* Once installed, `asdf` automatically switches to the correct version whenever you run commands.
-
-### Typical Flow
+## 🔄 Updating Versions
 
 ```bash
-# 1. Clone the repo
-cd my-project
+# Find latest version
+asdf latest python
+# Install & set it
+asdf install python 3.14.0
+asdf set -u python 3.14.0
+asdf reshim python
 
-# 2. Install required versions from .tool-versions
-asdf install
-
-# 3. Use the specified version automatically
-node -v   # v22.8.0
+# Remove old version if desired
+asdf uninstall python 3.13.0
 ```
 
-> You only need to install each version once. After that, it is reused across projects.
+> 🧩 reshim regenerates shims (the lightweight wrappers under ~/.asdf/shims/)
+> after installing or removing tools so your PATH points to the right executables.
 
 ---
 
-## 🧱 Version Management
+## 🧱 Version Management Reference
 
-### 🔍 Check Installed Versions
-
-```bash
-asdf list nodejs
-```
-
-Example output:
-
-```
-  20.12.2
-* 22.8.0
-```
-
-* `*` marks the currently active version.
-
-### 📦 Check Currently Active Versions for All Tools
-
-```bash
-asdf current
-```
-
-Example:
-
-```
-nodejs   22.8.0   (set by /Users/you/projects/my-app/.tool-versions)
-python   3.12.1   (set by /Users/you/.tool-versions)
-```
-
-### 🧰 Show All Installed Versions
-
-```bash
-asdf list
-```
-
-### 📁 Check Where Versions Are Installed
-
-```bash
-ls ~/.asdf/installs/nodejs/
-# => 20.12.2  22.8.0
-```
-
-| Command                      | Purpose                                      |
-| ---------------------------- | -------------------------------------------- |
-| `asdf list <lang>`           | Show installed versions                      |
-| `asdf current`               | Show active versions and source files        |
-| `asdf list`                  | List all installed tools and versions        |
-| `asdf list all <lang>`       | Show all available versions for installation |
-| `ls ~/.asdf/installs/<lang>` | Check actual installation directories        |
+| Command                           | Description                               |
+| --------------------------------- | ----------------------------------------- |
+| `asdf list <tool>`                | Show installed versions                   |
+| `asdf list all <tool>`            | Show all available versions               |
+| `asdf current`                    | Show active versions and their source     |
+| `asdf where <tool>`               | Show install path for a version           |
+| `asdf uninstall <tool> <version>` | Remove an installed version               |
+| `asdf plugin update --all`        | Update all plugin definitions             |
+| `asdf reshim [tool]`              | Rebuild shims after installing / removing |
 
 ---
 
 ## 🪞 How Shims Work
 
-asdf manages commands via **shims** — lightweight wrapper scripts that sit between your terminal and the actual binary.
-
-```
+```bash
 ~/.asdf/
 ├── installs/
-│   └── nodejs/22.8.0/bin/pnpm   # actual binary
+│   └── python/3.13.0/bin/python3   # actual binary
 └── shims/
-    ├── node
-    ├── npm
-    ├── pnpm                     # shim script
+    ├── python
+    ├── aws
+    └── node
 ```
 
-When you run `pnpm`, the shim does the following:
+When you type aws or python, the shim:
+Reads .tool-versions (local → global fallback).
+Activates the proper version.
+Executes the binary under ~/.asdf/installs/....
+If a command isn’t found, run:
 
-1. Detects which version of Node.js should be active (by reading `.tool-versions`).
-2. Activates that environment.
-3. Executes the corresponding binary from `~/.asdf/installs/...`.
+```bash
+asdf reshim
+```
 
-### 🧰 Useful Commands
+and confirm:
 
-| Command              | Purpose                                                 |                                            |
-| -------------------- | ------------------------------------------------------- | ------------------------------------------ |
-| `asdf reshim nodejs` | Regenerates shims after installing new tools or plugins |                                            |
-| `echo $PATH          | grep asdf`                                              | Check that `~/.asdf/shims` is in your PATH |
-| `which pnpm`         | Should point to `~/.asdf/shims/pnpm`                    |                                            |
-
-### ⚠️ Common Pitfalls
-
-* If `pnpm` or `node` show “command not found”, PATH to `asdf/shims` may be missing.
-* Make sure your shell loads asdf at startup:
-
-  ```bash
-  . "$(brew --prefix asdf)/libexec/asdf.sh"
-  ```
-* Run `asdf reshim nodejs` after enabling Corepack or installing new global tools.
+```bash
+which aws
+# => ~/.asdf/shims/aws
+```
 
 ---
 
 ## 🧩 Best Practices
 
-* Always include `.tool-versions` in your repo.
-* Prefer **local version locking (`asdf local`)** for project-specific environments.
-* Use `asdf install` on new machines to automatically install required versions.
-* Run `asdf plugin update --all` periodically.
+- Include .tool-versions in every repo.
+- Use asdf set -u for global defaults, asdf set for project-specific ones.
+- Run asdf plugin update --all regularly.
+- After pip install or adding new executables, run asdf reshim.
+- Keep ~/.asdf/shims in your PATH.
 
 ---
 
