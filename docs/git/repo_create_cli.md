@@ -73,7 +73,7 @@ If you already have a project folder:
 ```bash
 
 cd my-app
-gh repo create --source=. --remote=origin --push
+gh repo create --source=. --remote=origin --push　--private
 
 ```
 
