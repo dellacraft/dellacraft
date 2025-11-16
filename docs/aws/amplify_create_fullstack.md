@@ -180,18 +180,33 @@ Your app now interacts with the sandbox backend.
 
 ## 🏗️ 6. Create an Amplify App for Deployment (AWS Console)
 
-Before enabling CI/CD, you must create a deployment target Amplify App in AWS.
+Amplify Gen2 does not allow creating an empty “Backend-only” app from the web console.
+The console expects a GitHub connection (Amplify Hosting flow), which is not what we want.  
 
-Steps:
-1. Open AWS Management Console
-2. Go to AWS Amplify
-3. Click Create App
-4. Choose Backend only (Amplify Gen2)
-5. Enter a name (e.g., my-app)
-6. Finish app creation
+For CI/CD deployment, the correct way is to create an empty Amplify App container using the AWS CLI.  
 
-This creates a persistent Amplify App where CI/CD can deploy your backend.
-You only do this once per environment (e.g., dev, main).
+This App will serve as the deployment target for ampx pipeline-deploy.
+
+---
+
+### 📦 Create the Amplify App (empty container)
+
+Run the following command:
+
+```bash
+
+aws amplify create-app \
+  --name my-app \
+  --profile <AWS_PROFILE>
+
+```
+
+Replace:
+- my-app : any app name you like
+- <AWS_PROFILE> : your local AWS profile name (optional)
+
+This command creates a new Amplify App with no backend yet.
+You will deploy your real backend later via GitHub Actions.
 
 ---
 
@@ -212,6 +227,28 @@ Alternatively via CLI:
 aws amplify list-apps --query "apps[].{name:name,appId:appId}"
 
 ```
+
+You’ll see something like:
+
+```json
+
+[
+  {
+    "name": "my-app",
+    "appId": "d123abc4efgh5"
+  }
+]
+
+```
+
+Copy the appId.
+You will add this value to GitHub Secrets in the next step.
+
+---
+
+### 📌 Notes
+- This step is required once per environment (e.g., main, dev)
+- The app created here is empty until CI/CD deploys the backend
 
 ---
 
